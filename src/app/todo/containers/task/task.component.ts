@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatCard} from '@angular/material/card';
 import {MatToolbar} from '@angular/material/toolbar';
 import {TaskService} from '../../services/task.service';
 import {TaskListComponent} from '../../components/task-list/task-list.component';
+import {Observable} from 'rxjs';
+import {Task} from '../../model/task';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-task',
@@ -10,20 +13,22 @@ import {TaskListComponent} from '../../components/task-list/task-list.component'
   imports: [
     MatCard,
     MatToolbar,
-    TaskListComponent
+    TaskListComponent,
+    AsyncPipe
   ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent{
+
+  tasks$: Observable<Task[]> | null = null;
 
   constructor(private readonly taskService: TaskService) {
+    this.refresh();
   }
 
-  ngOnInit(): void {
-    this.taskService.listAllTasks().subscribe(tasks => {
-      console.log(tasks);
-    });
+  refresh() {
+    this.tasks$ = this.taskService.listAllTasks().pipe()
   }
 
 }

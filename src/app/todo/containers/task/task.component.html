@@ -2,5 +2,8 @@
   <mat-toolbar color="primary">
     <span>Lista de tarefas</span>
   </mat-toolbar>
-  <app-task-list></app-task-list>
+  @if (tasks$ | async; as tasks) {
+    <app-task-list [taskList]="tasks"></app-task-list>
+  }
+
 </mat-card>

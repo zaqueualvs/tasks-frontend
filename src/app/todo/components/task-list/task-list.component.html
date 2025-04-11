@@ -1,1 +1,11 @@
-<p>todo-list works!</p>
+<mat-card>
+  @for (task of taskList; track task.id) {
+    <mat-card class="task-card" appearance="outlined">
+      <mat-card-title> {{ task.title }}</mat-card-title>
+      <mat-card-actions class="actions">
+        <button mat-raised-button>Editar</button>
+        <button mat-raised-button>Excluir</button>
+      </mat-card-actions>
+    </mat-card>
+  }
+</mat-card>
