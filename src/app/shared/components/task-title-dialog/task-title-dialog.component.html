@@ -1,0 +1,16 @@
+<mat-card>
+  <h2 mat-dialog-title>{{ data.message }}</h2>
+  <mat-dialog-content>
+    <p>Oque deseja fazer?</p>
+    <form>
+      <mat-form-field appearance="outline">
+        <input matInput [formControl]="title" maxlength="50">
+        <mat-hint></mat-hint>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button>Salvar</button>
+    <button mat-button>Cancelar</button>
+  </mat-dialog-actions>
+</mat-card>

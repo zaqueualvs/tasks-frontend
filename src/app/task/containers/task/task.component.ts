@@ -15,6 +15,7 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {
   ConfirmationDialogComponent
 } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import {TaskTitleDialogComponent} from '../../../shared/components/task-title-dialog/task-title-dialog.component';
 
 @Component({
   selector: 'app-task',
@@ -60,11 +61,20 @@ export class TaskComponent implements OnInit, OnChanges {
   }
 
   editTask(task: any) {
+    const dialogRef = this.dialog.open(TaskTitleDialogComponent, {
+      data: {message: 'Editar tarefa', title: task.title},
+    })
     console.log(task);
   }
 
+  createTask() {
+    const dialogRef = this.dialog.open(TaskTitleDialogComponent, {
+      data: {message: 'Criar tarefa', title: ''},
+    })
+  }
+
   deleteTask(task: any) {
-    const dialogRed = this.dialog.open(ConfirmationDialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: 'Tem certeza que deseja remover essa tarefa?',
     })
     console.log(task);

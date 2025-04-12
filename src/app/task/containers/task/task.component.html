@@ -13,7 +13,7 @@
           }
         </mat-select>
       </mat-form-field>
-      <button mat-raised-button>Criar tarefa</button>
+      <button mat-raised-button (click)="createTask()">Criar tarefa</button>
     </section>
     <app-task-list
       [taskList]="tasks" [filter]="filter.value"
