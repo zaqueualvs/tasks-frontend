@@ -8,6 +8,16 @@ mat-card{
     display: flex;
     justify-content: center;
   }
+
+  .spinner{
+    width: 300px;
+    height: 300px;
+    margin: 2px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 }
 
 @media (max-width: 700px) {

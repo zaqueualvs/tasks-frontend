@@ -6,6 +6,7 @@ import {TaskListComponent} from '../../components/task-list/task-list.component'
 import {Observable} from 'rxjs';
 import {Task} from '../../model/task';
 import {AsyncPipe} from '@angular/common';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-task',
@@ -14,7 +15,8 @@ import {AsyncPipe} from '@angular/common';
     MatCard,
     MatToolbar,
     TaskListComponent,
-    AsyncPipe
+    AsyncPipe,
+    MatProgressSpinner
   ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
