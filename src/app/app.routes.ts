@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {TaskComponent} from './todo/containers/task/task.component';
+import {TaskComponent} from './task/containers/task/task.component';
 
 export const routes: Routes = [
   {path: '', component: TaskComponent},
