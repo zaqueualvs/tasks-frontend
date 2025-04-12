@@ -1,9 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MatCard, MatCardActions, MatCardFooter, MatCardTitle} from '@angular/material/card';
+import {MatCard, MatCardActions, MatCardContent, MatCardFooter, MatCardTitle} from '@angular/material/card';
 import {Task} from '../../model/task';
-import {MatButton} from '@angular/material/button';
+import {MatButton, MatFabButton, MatIconButton} from '@angular/material/button';
 import {MatChip, MatChipSet} from '@angular/material/chips';
-import {NgClass} from '@angular/common';
+import {DatePipe, NgClass} from '@angular/common';
+import {MatIcon} from '@angular/material/icon';
+import {MatTooltip} from '@angular/material/tooltip';
 
 interface Itask extends Task {
   statusClass: string;
@@ -20,7 +22,13 @@ interface Itask extends Task {
     MatCardFooter,
     MatChipSet,
     MatChip,
-    NgClass
+    NgClass,
+    MatCardContent,
+    DatePipe,
+    MatIcon,
+    MatFabButton,
+    MatTooltip,
+    MatIconButton
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss'
