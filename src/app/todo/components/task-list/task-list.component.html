@@ -1,7 +1,12 @@
-<mat-card>
-  @for (task of taskList; track task.id) {
+<mat-card class="main-card">
+  @for (task of tasks; track task.id) {
     <mat-card class="task-card" appearance="outlined">
       <mat-card-title> {{ task.title }}</mat-card-title>
+      <mat-card-footer class="card-footer">
+        <mat-chip-set aria-label="Chihuahua traits">
+          <mat-chip [ngClass]="task.statusClass">{{ task.status }}</mat-chip>
+        </mat-chip-set>
+      </mat-card-footer>
       <mat-card-actions class="actions">
         <button mat-raised-button>Editar</button>
         <button mat-raised-button>Excluir</button>
