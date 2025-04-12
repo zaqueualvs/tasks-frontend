@@ -3,7 +3,19 @@
     <span>Lista de tarefas</span>
   </mat-toolbar>
   @if (tasks$ | async; as tasks) {
-    <app-task-list [taskList]="tasks"></app-task-list>
+    <section class="header-actions">
+      <mat-form-field appearance="outline">
+        <mat-label>Filtrar tarefa</mat-label>
+        <mat-select [formControl]="filter">
+          <mat-option>--</mat-option>
+          @for (option of options; track option) {
+            <mat-option [value]="option">{{ option }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button>Criar tarefa</button>
+    </section>
+    <app-task-list [taskList]="tasks" [filter]="filter.value"></app-task-list>
   } @else {
     <div class="spinner">
       <h3>Buscando dados...</h3>

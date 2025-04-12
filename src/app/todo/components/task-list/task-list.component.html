@@ -4,7 +4,7 @@
       <mat-card-title> {{ task.title }}</mat-card-title>
       <mat-card-content>
         <p>Criado em: {{
-            task.created_at | date: 'hh:mm dd / MM / yyyy'
+            task.created_at | date: 'hh:mm dd/MM/yyyy'
           }}</p>
       </mat-card-content>
       <mat-card-footer class="card-footer">
@@ -14,14 +14,14 @@
       </mat-card-footer>
       <mat-card-actions class="actions">
         @if (task.status.toLowerCase() !== 'concluído'.toLowerCase()) {
-          <button mat-icon-button matTooltip="Próxima etapa">
+          <button mat-icon-button matTooltipPosition="above" matTooltip="Próxima etapa">
             <mat-icon style="color: green">assignment_turned_in</mat-icon>
           </button>
         }
-        <button mat-icon-button matTooltip="Editar">
+        <button mat-icon-button matTooltipPosition="above" matTooltip="Editar">
           <mat-icon style="color: blue">edit</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="Excluir">
+        <button mat-icon-button matTooltipPosition="above" matTooltip="Excluir">
           <mat-icon style="color: red">delete</mat-icon>
         </button>
       </mat-card-actions>

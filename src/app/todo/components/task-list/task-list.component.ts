@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MatCard, MatCardActions, MatCardContent, MatCardFooter, MatCardTitle} from '@angular/material/card';
 import {Task} from '../../model/task';
 import {MatButton, MatFabButton, MatIconButton} from '@angular/material/button';
@@ -33,9 +33,10 @@ interface Itask extends Task {
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss'
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent implements OnInit, OnChanges {
 
   @Input() taskList: Task[] = [];
+  @Input() filter: string | null = null;
 
   tasks: Itask[] = [];
 
@@ -43,12 +44,10 @@ export class TaskListComponent implements OnInit {
   getStatusClass(status: string): string {
     switch (status.toLowerCase()) {
       case 'concluído':
-        console.log(status);
         return 'status-concluido';
       case "pendente":
         return 'status-pendente';
       case 'em andamento':
-        console.log(status);
         return 'status-em-andamento';
       default:
         return '';
@@ -60,8 +59,22 @@ export class TaskListComponent implements OnInit {
       ...value,
       statusClass: this.getStatusClass(value.status),
     }));
+  }
 
-    console.log(this.tasks);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['filter']) {
+      this.tasks = this.taskList
+        .filter(value => {
+          if (!this.filter) {
+            return this.taskList
+          }
+          return value.status.toLowerCase() === this.filter?.toLowerCase()
+        })
+        .map(value => ({
+          ...value,
+          statusClass: this.getStatusClass(value.status),
+        }));
+    }
   }
 
 }

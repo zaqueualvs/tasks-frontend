@@ -8,6 +8,21 @@ mat-card{
     display: flex;
     justify-content: center;
   }
+  .header-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 5px;
+
+    mat-form-field{
+      display: flex;
+      flex-direction: row;
+    }
+    button{
+      background: rgba(30, 144, 255, 0.7);
+    }
+  }
 
   .spinner{
     width: 300px;
