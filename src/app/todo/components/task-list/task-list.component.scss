@@ -1,9 +1,11 @@
 .main-card {
+  background-color: #FAF9F6;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 
   .task-card {
+    background-color: #fffaeb;
     margin: 1rem;
     height: 250px;
     display: flex;
