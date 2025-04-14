@@ -119,14 +119,7 @@ export class TaskComponent implements OnInit, OnChanges {
   }
 
   private refresh() {
-    this.tasks$ = this.taskService.loadTasks().pipe(
-      map((tasks) => {
-        return tasks.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-      }),
-    )
-    this.tasks$.subscribe((tasks) => {
-      console.log(tasks);
-    })
+    this.tasks$ = this.taskService.loadTasks()
   }
 
   private getOptions() {

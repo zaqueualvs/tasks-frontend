@@ -76,10 +76,13 @@ export class TaskListComponent implements OnInit, OnChanges {
   }
 
   private changeClassStatus() {
-    this.tasks = this.taskList.map(value => ({
-      ...value,
-      statusClass: this.getStatusClass(value.status),
-    }));
+    this.tasks = this.taskList
+      .map(value => ({
+        ...value,
+        statusClass: this.getStatusClass(value.status),
+      }))
+      .sort((a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
   }
 
   private getStatusClass(status: string): string {
