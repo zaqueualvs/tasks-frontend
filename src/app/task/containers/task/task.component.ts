@@ -3,7 +3,7 @@ import {MatCard} from '@angular/material/card';
 import {MatToolbar} from '@angular/material/toolbar';
 import {TaskService} from '../../services/task.service';
 import {TaskListComponent} from '../../components/task-list/task-list.component';
-import {map, Observable, of} from 'rxjs';
+import {BehaviorSubject, map, Observable, of} from 'rxjs';
 import {Task} from '../../model/task';
 import {AsyncPipe} from '@angular/common';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
@@ -53,6 +53,7 @@ export class TaskComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.refresh()
     this.getOptions();
   }
 
@@ -118,7 +119,7 @@ export class TaskComponent implements OnInit, OnChanges {
   }
 
   private refresh() {
-    this.tasks$ = this.taskService.listAllTasks().pipe(
+    this.tasks$ = this.taskService.loadTasks().pipe(
       map((tasks) => {
         return tasks.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
       }),

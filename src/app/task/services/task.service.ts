@@ -14,7 +14,7 @@ export class TaskService {
   constructor(private readonly http: HttpClient) {
   }
 
-  listAllTasks(): Observable<Task[]> {
+  loadTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.API);
   }
 
@@ -26,9 +26,7 @@ export class TaskService {
     if (task.id) {
       return this.updateTask(task);
     }
-    console.log(task);
     return this.createTask(task);
-
   }
 
   private updateTask(task: Task): Observable<void> {
