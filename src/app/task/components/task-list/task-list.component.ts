@@ -37,7 +37,7 @@ export class TaskListComponent implements OnInit, OnChanges {
   @Input() filter: string | null = null;
 
   @Output() changeStatus = new EventEmitter<Task>();
-  @Output() deleteTask = new EventEmitter<number>();
+  @Output() deleteTask = new EventEmitter<string>();
   @Output() editTask = new EventEmitter<Task>();
 
   tasks: Itask[] = [];
@@ -80,6 +80,7 @@ export class TaskListComponent implements OnInit, OnChanges {
       ...value,
       statusClass: this.getStatusClass(value.status),
     }));
+    console.log(this.tasks);
   }
 
   private getStatusClass(status: string): string {

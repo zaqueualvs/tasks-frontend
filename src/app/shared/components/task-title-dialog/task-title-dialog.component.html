@@ -4,13 +4,13 @@
     <p>Oque deseja fazer?</p>
     <form>
       <mat-form-field appearance="outline">
-        <input matInput [formControl]="title" maxlength="50">
-        <mat-hint></mat-hint>
+        <textarea matInput [formControl]="title" maxlength="45"></textarea>
+        <mat-hint align="end">{{ getTotal }}/45</mat-hint>
       </mat-form-field>
     </form>
   </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-button>Salvar</button>
-    <button mat-button>Cancelar</button>
+  <mat-dialog-actions class="actions">
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="title.invalid">Salvar</button>
+    <button mat-raised-button color="accent" (click)="onNoClick()" >Cancelar</button>
   </mat-dialog-actions>
 </mat-card>

@@ -3,7 +3,7 @@ import {MatCard} from '@angular/material/card';
 import {MatToolbar} from '@angular/material/toolbar';
 import {TaskService} from '../../services/task.service';
 import {TaskListComponent} from '../../components/task-list/task-list.component';
-import {Observable, of} from 'rxjs';
+import {map, Observable, of} from 'rxjs';
 import {Task} from '../../model/task';
 import {AsyncPipe} from '@angular/common';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
@@ -57,31 +57,72 @@ export class TaskComponent implements OnInit, OnChanges {
   }
 
   editStatus(task: any) {
-    console.log(task);
+    this.taskService.save(task).subscribe(
+      () => {
+        this.refresh();
+      }
+    );
   }
 
   editTask(task: any) {
     const dialogRef = this.dialog.open(TaskTitleDialogComponent, {
       data: {message: 'Editar tarefa', title: task.title},
-    })
-    console.log(task);
+    });
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result) {
+        task.title = result;
+        this.taskService.save(task).subscribe(
+          () => {
+            this.refresh();
+          }
+        )
+      }
+    });
   }
 
   createTask() {
     const dialogRef = this.dialog.open(TaskTitleDialogComponent, {
       data: {message: 'Criar tarefa', title: ''},
-    })
+    });
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result) {
+        const task: Task =
+          {
+            id: '',
+            title: result,
+            status: '',
+            created_at: ''
+          }
+        this.taskService.save(task).subscribe(
+          () => {
+            this.refresh();
+          }
+        )
+      }
+    });
   }
 
-  deleteTask(task: any) {
+  deleteTask(taskId: any) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: 'Tem certeza que deseja remover essa tarefa?',
-    })
-    console.log(task);
+    });
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.taskService.deleteTask(taskId).subscribe(
+          () => {
+            this.refresh();
+          }
+        )
+      }
+    });
   }
 
   private refresh() {
-    this.tasks$ = this.taskService.listAllTasks().pipe()
+    this.tasks$ = this.taskService.listAllTasks().pipe(
+      map((tasks) => {
+        return tasks.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      }),
+    )
   }
 
   private getOptions() {

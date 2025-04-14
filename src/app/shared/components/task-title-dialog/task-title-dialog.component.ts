@@ -27,10 +27,22 @@ import {MatButton} from '@angular/material/button';
 export class TaskTitleDialogComponent {
 
   readonly data = inject(MAT_DIALOG_DATA);
-  title = new FormControl(this.data.title, [Validators.required, Validators.max(50)]);
+  title = new FormControl(this.data.title, [Validators.required, Validators.max(45)]);
 
   constructor(
     public dialogRef: MatDialogRef<TaskTitleDialogComponent>
   ) {
+  }
+
+  get getTotal(): number {
+    return this.title.value.length;
+  }
+
+  onSave() {
+    this.dialogRef.close(this.title.value);
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

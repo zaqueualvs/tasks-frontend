@@ -18,23 +18,24 @@ export class TaskService {
     return this.http.get<Task[]>(this.API);
   }
 
-  deleteTask(id: number): Observable<void> {
-    return this.http.delete<void>(this.API + 'tasks/' + id);
+  deleteTask(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.API}/${id}`);
   }
 
   save(task: Task) {
     if (task.id) {
       return this.updateTask(task);
     }
+    console.log(task);
     return this.createTask(task);
 
   }
 
   private updateTask(task: Task): Observable<void> {
-    return this.http.put<void>(this.API + 'tasks/' + task.id, task);
+    return this.http.put<void>(`${this.API}/${task.id}`, task);
   }
 
   private createTask(task: Task): Observable<void> {
-    return this.http.post<void>(this.API + 'tasks', task);
+    return this.http.post<void>(this.API, task);
   }
 }
