@@ -124,6 +124,9 @@ export class TaskComponent implements OnInit, OnChanges {
         return tasks.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
       }),
     )
+    this.tasks$.subscribe((tasks) => {
+      console.log(tasks);
+    })
   }
 
   private getOptions() {

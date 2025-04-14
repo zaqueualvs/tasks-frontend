@@ -80,7 +80,6 @@ export class TaskListComponent implements OnInit, OnChanges {
       ...value,
       statusClass: this.getStatusClass(value.status),
     }));
-    console.log(this.tasks);
   }
 
   private getStatusClass(status: string): string {
