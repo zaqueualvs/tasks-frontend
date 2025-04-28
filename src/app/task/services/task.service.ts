@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Task} from '../model/task';
 import {environment} from '../../../environments/environment';
-import {first, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +15,11 @@ export class TaskService {
   }
 
   loadTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.API).pipe(first());
-
+    return this.http.get<Task[]>(this.API);
   }
 
   deleteTask(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.API}/${id}`).pipe(first());
+    return this.http.delete<void>(`${this.API}/${id}`);
 
   }
 
@@ -32,11 +31,11 @@ export class TaskService {
   }
 
   private updateTask(task: Task): Observable<void> {
-    return this.http.put<void>(`${this.API}/${task.id}`, task).pipe(first());
+    return this.http.put<void>(`${this.API}/${task.id}`, task);
 
   }
 
   private createTask(task: Task): Observable<void> {
-    return this.http.post<void>(this.API, task).pipe(first());
+    return this.http.post<void>(this.API, task);
   }
 }

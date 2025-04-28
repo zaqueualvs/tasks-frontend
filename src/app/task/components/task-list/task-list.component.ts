@@ -51,7 +51,8 @@ export class TaskListComponent implements OnInit, OnChanges {
       this.tasks = this.taskList
         .filter(value => {
           if (!this.filter) {
-            return this.taskList
+            return this.taskList.sort((a, b) =>
+              new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
           }
           return value.status.toLowerCase() === this.filter?.toLowerCase()
         })

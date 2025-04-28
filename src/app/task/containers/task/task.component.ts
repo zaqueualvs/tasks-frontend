@@ -3,7 +3,7 @@ import {MatCard} from '@angular/material/card';
 import {MatToolbar} from '@angular/material/toolbar';
 import {TaskService} from '../../services/task.service';
 import {TaskListComponent} from '../../components/task-list/task-list.component';
-import {BehaviorSubject, map, Observable, of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Task} from '../../model/task';
 import {AsyncPipe} from '@angular/common';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
@@ -16,6 +16,7 @@ import {
   ConfirmationDialogComponent
 } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import {TaskTitleDialogComponent} from '../../../shared/components/task-title-dialog/task-title-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-task',
@@ -38,13 +39,15 @@ import {TaskTitleDialogComponent} from '../../../shared/components/task-title-di
 })
 export class TaskComponent implements OnInit, OnChanges {
 
-  tasks$: Observable<Task[]> = of([]);
+  tasks$?: Observable<Task[]>;
 
   filter = new FormControl(null);
   options = new Set<string>();
 
   constructor(private readonly taskService: TaskService,
-              private readonly dialog: MatDialog) {
+              private readonly dialog: MatDialog,
+              private readonly snackBar: MatSnackBar,
+  ) {
   }
 
   ngOnInit(): void {
@@ -112,6 +115,11 @@ export class TaskComponent implements OnInit, OnChanges {
         this.taskService.deleteTask(taskId).subscribe(
           () => {
             this.refresh();
+            this.snackBar.open('Tarefa removida com sucesso!', 'X', {
+              duration: 5000,
+              verticalPosition: 'top',
+              horizontalPosition: 'center'
+            });
           }
         )
       }
